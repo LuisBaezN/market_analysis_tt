@@ -71,12 +71,36 @@ data['number'] = data['number'].astype('int16')
 ## Análisis de datos
 
 '''
-Grafiquemos la proporción de tipo de negocios
+Grafiquemos la proporción por tipo de negocio
 '''
-sns.set_palette('coolwarm')
+sns.set_palette('colorblind')
 
 sns.histplot(data=data['business_type'], stat='percent').set_title('Business distribution')
 plt.grid()
 plt.show()
 
 data['business_type'].value_counts()
+
+'''
+Vemos que hay una clara predominancia de restaurantes en Los Angeles. Estos representan al rededor del 75%, 
+en segundo lugar se encuentran negocios de comida rápida, los cuales representan el 11% y en tercer lugar 
+hay cafeterías, las cuales representan al rededor del 5%.
+
+Ahora veamos las proporciones de negocios que pertenecen a una franquicia y los que no
+'''
+
+sns.histplot(data=data['chain'], stat='percent', binwidth=0.3).set_title('Chain distribution')
+plt.grid()
+plt.show()
+
+'''
+Poco más del 60% de los negocios, no pertenecen a una franquicia.
+
+
+'''
+
+sns.countplot(data=data, x='business_type', hue='chain')
+plt.grid()
+plt.show()
+
+
